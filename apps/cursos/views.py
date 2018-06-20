@@ -91,6 +91,12 @@ class RAList(ListView):
     model = ResultadoDeAprendizaje
     template_name = 'cursos/landingRA.html'
 
+    def get_context_data(self, **kwargs):
+        this_name = self.kwargs['pk']
+        context = super(RAList, self).get_context_data(**kwargs)
+        context['tags'] = Curso.objects.get(pk= this_name)
+        return context
+
 
 
 
