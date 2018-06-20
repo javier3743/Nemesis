@@ -1,0 +1,94 @@
+{% extends 'base/base.html' %}
+
+{% block title %}
+    Programas
+{% endblock %}
+{% block content %}
+
+
+    {% if user.is_authenticated and user.is_director %}
+        <table class="text-center table table-bordered">
+            <thead>
+            <tr>
+                <td>Codigo</td>
+                <td>Nombre</td>
+                <td>Numero de Creditos</td>
+                <td>Numero de Semestres</td>
+                <td>Escuela</td>
+                <td>Facultad</td>
+                <td>Acciones</td>
+
+            </tr>
+
+            </thead>
+            <tbody>
+            {% if object_list %}
+                <h1> Programas Academicos </h1>
+                {% for programa in object_list %}
+                    {% if programa.id == user.programa.id %}
+                        <tr>
+                            <td>{{ programa.Codigo }}</td>
+                            <td>{{ programa.Nombre }}</td>
+                            <td>{{ programa.NumCreditosGrad }}</td>
+                            <td>{{ programa.NumSemestres }}</td>
+                            <td>{{ programa.Escuela }}</td>
+                            <td>{{ programa.Facultad }}</td>
+                            <td>
+                                <a class="btn btn-info" href="{% url 'updatePrograma' programa.id %}">Editar</a>
+                                <a class="btn btn-danger" href="{% url 'deletePrograma' programa.id %}">Eliminar</a>
+                            </td>
+                        </tr>
+                    {% endif %}
+
+                {% endfor %}
+
+            {% else %}
+                <h1>No hay Programas Academicos Registrados</h1>
+            {% endif %}
+            </tbody>
+        </table>
+    {% elif user.is_authenticated and user.is_dean %}
+        <a href="/programas/add" class="pull-right btn btn-success" role="button">Agregar</a>
+        <table class="text-center table table-bordered">
+        <thead>
+        <tr>
+            <td>Codigo</td>
+            <td>Nombre</td>
+            <td>Numero de Creditos</td>
+            <td>Numero de Semestres</td>
+            <td>Escuela</td>
+            <td>Facultad</td>
+            <td>Acciones</td>
+
+        </tr>
+
+        </thead>
+        <tbody>
+        {% if object_list %}
+            <h1> Programas Academicos </h1>
+            {% for programa in object_list %}
+                {% if programa.Facultad.id == user.facultad.id %}
+
+                    <tr>
+                        <td>{{ programa.Codigo }}</td>
+                        <td>{{ programa.Nombre }}</td>
+                        <td>{{ programa.NumCreditosGrad }}</td>
+                        <td>{{ programa.NumSemestres }}</td>
+                        <td>{{ programa.Escuela }}</td>
+                        <td>{{ programa.Facultad }}</td>
+                        <td>
+                            <a class="btn btn-info" href="{% url 'updatePrograma' programa.id %}">Editar</a>
+                            <a class="btn btn-danger" href="{% url 'deletePrograma' programa.id %}">Eliminar</a>
+                        </td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+
+        {% else %}
+            <h1>No hay Programas Academicos Registrados</h1>
+        {% endif %}
+    {% endif %}
+</tbody>
+</table>
+
+{% endblock %}

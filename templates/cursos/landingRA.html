@@ -1,0 +1,41 @@
+{% extends 'base/base.html' %}
+
+{% block title %}
+    Cursos
+{% endblock %}
+{% block content %}
+    <a href="/cursos/addCompe/{{ tags.id }}" class="pull-right btn btn-success" role="button">Agregar</a>
+
+        <table class="text-center table table-bordered">
+
+        <thead>
+        <tr>
+            <td>Competencia</td>
+            <td>Acciones</td>
+
+        </tr>
+
+        </thead>
+        <tbody>
+        {% if object_list %}
+            <h1> Competencias para {{ tags }} </h1>
+            {% for competencia in object_list %}
+                {% if competencia.Curso_id ==  tags.id  %}
+                    <tr>
+                        <td>{{ competencia.Competencia }}</td>
+                        <td>
+                            <a class="btn btn-info btn-sm" href="{% url 'updateCompe' competencia.id %}">Editar</a>
+                            <a class="btn btn-info btn-sm" href="{% url 'deleteCompe' competencia.id %}">RA</a>
+                            <a class="btn btn-danger btn-sm" href="{% url 'deleteCompe' competencia.id %}">Eliminar</a>
+
+                        </td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+
+        {% else %}
+
+        {% endif %}
+        </tbody>
+    </table>
+{% endblock %}

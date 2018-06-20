@@ -1,0 +1,136 @@
+{% extends 'base/base.html' %}
+
+{% block title %}
+    Cursos
+{% endblock %}
+{% block content %}
+    <a href="/cursos/add" class="pull-right btn btn-success" role="button">Agregar</a>
+    {% if user.is_authenticated and user.is_teacher %}
+        <table class="text-center table table-bordered">
+
+        <thead>
+        <tr>
+            <td>Codigo</td>
+            <td>Nombre</td>
+            <td># Creditos</td>
+            <td>Horas Magistral</td>
+            <td>Horas Independiente</td>
+            <td>Tipo de Curso</td>
+            <td>Validable</td>
+            <td>Habilidable</td>
+            <td>Programa Academico</td>
+            <td>Semestre</td>
+            <td>Prerequisitos</td>
+            <td>Acciones</td>
+
+        </tr>
+
+        </thead>
+        <tbody>
+        {% if object_list %}
+            <h1> Cursos Registrados </h1>
+            {% for curso in object_list %}
+                <tr>
+                    <td>{{ curso.Codigo }}</td>
+                    <td>{{ curso.Nombre }}</td>
+                    <td>{{ curso.Creditos }}</td>
+                    <td>{{ curso.HorasDeClaseMagistral }}</td>
+                    <td>{{ curso.NumHorasEstudio }}</td>
+                    <td>{{ curso.TipoDeCurso }}</td>
+                    <td>{{ curso.Validable }}</td>
+                    <td>{{ curso.Habilitable }}</td>
+                    <td>{{ curso.Programa.Nombre }}</td>
+                    <td>{{ curso.NumSemestreUbic }}</td>
+                    <td>
+                        <ul>{% for prerequi in curso.AsigPrerrequisitos.all %}
+                            <li>
+                                {{ prerequi.Codigo }} - {{ prerequi.Nombre }}
+                            </li>
+                        {% endfor %}
+                        </ul>
+                    </td>
+                    <td>
+                        <a class="btn btn-info" href="{% url 'updateCurso' curso.id %}">Editar</a>
+                        <a class="btn btn-info" href="{% url 'designCurso' curso.id %}">Diseñar</a>
+                        <a class="btn btn-danger" href="{% url 'deleteCursos' curso.id %}">Eliminar</a>
+                    </td>
+                </tr>
+
+            {% endfor %}
+
+        {% else %}
+            <h1>No hay cursos Registrados</h1>
+        {% endif %}
+        </tbody>
+    </table>
+    {% elif user.is_authenticated and user.is_director %}
+                <table class="text-center table table-bordered">
+
+                    <thead>
+                    <tr>
+                        <td>Codigo</td>
+                        <td>Nombre</td>
+                        <td># Creditos</td>
+                        <td>Horas Magistral</td>
+                        <td>Horas Independiente</td>
+                        <td>Tipo de Curso</td>
+                        <td>Validable</td>
+                        <td>Habilidable</td>
+                        <td>Programa Academico</td>
+                        <td>Semestre</td>
+                        <td>Prerequisitos</td>
+                        <td>Acciones</td>
+
+                    </tr>
+
+                    </thead>
+                    <tbody>
+                    {% if object_list %}
+                        <h1> Cursos Registrados </h1>
+                        {% for curso in object_list %}
+                            {% if curso.Programa.id == user.programa.id %}
+                            <tr>
+                                <td>{{ curso.Codigo }}</td>
+                                <td>{{ curso.Nombre }}</td>
+                                <td>{{ curso.Creditos }}</td>
+                                <td>{{ curso.HorasDeClaseMagistral }}</td>
+                                <td>{{ curso.NumHorasEstudio }}</td>
+                                <td>{{ curso.TipoDeCurso }}</td>
+                                <td>{{ curso.Validable }}</td>
+                                <td>{{ curso.Habilitable }}</td>
+                                <td>{{ curso.Programa.Nombre }}</td>
+                                <td>{{ curso.NumSemestreUbic }}</td>
+                                <td>
+                                    <ul>{% for prerequi in curso.AsigPrerrequisitos.all %}
+                                        <li>
+                                            {{ prerequi.Codigo }} - {{ prerequi.Nombre }}
+                                        </li>
+
+
+                                    {% endfor %}
+                                    </ul>
+                                </td>
+
+                                <td>
+                                    <a class="btn btn-info" href="{% url 'updateCurso' curso.id %}">Editar</a>
+                                    <a class="btn btn-danger" href="{% url 'deleteCursos' curso.id %}">Eliminar</a>
+                                </td>
+                            </tr>
+                    {% else %}
+
+                            {% endif %}
+
+                        {% endfor %}
+
+                    {% else %}
+                        <h1>No hay cursos Registrados</h1>
+                    {% endif %}
+                    </tbody>
+                </table>
+            {% endif %}
+
+
+
+
+
+{% endblock %}

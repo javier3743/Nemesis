@@ -1,0 +1,15 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+<form role="form" method="post">
+<div class="col-md-4 col-md-offset-4 ">
+	{% csrf_token %}
+	{{ form.as_p }}
+
+	<button class = 'btn btn-success'type="submit">Registrar</button>
+
+</form>
+<p>1 # horas de trabajo semanales para una asignatura = créditos de la asignatura x 3</p>
+    <p>2. # horas de trabajo semanales para una asignatura = horas de clase magistral + horas de trabajo individual del estudiante</p>
+    </div>
+{% endblock %}

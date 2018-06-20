@@ -1,0 +1,25 @@
+.navbar {
+    background-color: #cc0000;
+
+}
+
+.navbar > li > a:focus {
+    color: white;
+    background-color: white;
+
+}
+
+.navbar-brand > li {
+
+    background-color: white;
+}
+
+
+.navbar-default .navbar-nav>li>a:hover {
+    background-color: #ffffff;
+
+
+}
+.table td {
+   text-align: center;
+}

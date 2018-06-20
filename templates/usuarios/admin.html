@@ -1,0 +1,43 @@
+{% extends 'base/base.html' %}
+
+{% block title %}
+    Admin
+{% endblock %}
+{% block content %}
+    <h1>Desea Crear Un Usuario De Tipo:</h1>
+<a class="btn btn-info" href="{% url 'profesor' %}">Profesor</a>
+    <a class="btn btn-info" href="{% url 'director' %}">Director</a>
+    <a class="btn btn-info" href="{% url 'deacano' %}">Decano</a>
+    <table class="text-center table table-bordered">
+        <thead>
+        <tr>
+            <td>Email</td>
+            <td>Nombre</td>
+            <td>Rol</td>
+            <td>Acciones</td>
+
+        </tr>
+
+        </thead>
+        <tbody>
+        {% if object_list %}
+            <h3> Listado De Usarios </h3>
+            {% for users in object_list %}
+                <tr>
+                    <td>{{ users.get_username }}</td>
+                    <td>{{ users.get_full_name }}</td>
+                    <td>{{ users.get_type }}</td>
+                    <td>
+                        <a class="btn btn-info" href="{% url 'updateUser' users.id %}">Editar</a>
+                        <a class="btn btn-danger" href="{% url 'deleteUser' users.id %}">Eliminar</a>
+                    </td>
+                </tr>
+
+            {% endfor %}
+
+        {% else %}
+            <h1>No hay Usuarios Registrados</h1>
+        {% endif %}
+        </tbody>
+    </table>
+{% endblock %}

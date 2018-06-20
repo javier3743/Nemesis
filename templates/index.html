@@ -1,0 +1,22 @@
+{% extends 'base/base.html' %}
+
+
+
+{% if user.is_authenticated %}
+
+{% else %}
+
+{% endif %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+        <h1> Bienvenido, {{ user.first_name }} </h1>
+    {% else %}
+        <h1>Bienvenido Por favor Ingresa al Sistema.</h1>
+    {% endif %}
+
+{% endblock %}
