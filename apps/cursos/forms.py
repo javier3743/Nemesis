@@ -88,3 +88,15 @@ class CompeForm(forms.ModelForm):
     Competencia = forms.Field(widget=forms.Textarea(attrs={'class': 'form-control'}), label= 'Competencia')
     Curso = forms.ModelChoiceField(Curso.objects.all(), widget=forms.HiddenInput)
 
+class RAForm(forms.ModelForm):
+    class Meta:
+        model = ResultadoDeAprendizaje
+        fields = ['Verbo', 'Contenidos', 'Contexto', 'Proposito', 'Competencia']
+
+
+    Verbo = forms.Field(widget=forms.TextInput(attrs={'class': 'form-control'}), label= 'Verbo')
+    Contenidos = forms.Field(widget=forms.TextInput(attrs={'class': 'form-control'}), label= 'Contenido')
+    Contexto = forms.Field(widget=forms.TextInput(attrs={'class': 'form-control'}), label= 'Contexto')
+    Proposito = forms.Field(widget=forms.TextInput(attrs={'class': 'form-control'}), label= 'Proposito')
+    Competencia = forms.ModelChoiceField(Competencias.objects.all(), widget=forms.HiddenInput)
+

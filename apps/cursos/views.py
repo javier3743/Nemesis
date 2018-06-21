@@ -97,7 +97,46 @@ class RAList(ListView):
         context['Compe'] = Competencias.objects.get(pk= this_name)
         return context
 
+class RACreate(CreateView):
+    model = ResultadoDeAprendizaje
+    form_class = RAForm
+    template_name = 'cursos/addRA.html'
 
+    def get_success_url(self):
+        return reverse('landingRA', kwargs={'pk': self.kwargs['pk']})
+
+    def get_initial(self):
+        return {'Competencia': self.kwargs['pk']}
+
+class RAUpdate(UpdateView):
+    model = ResultadoDeAprendizaje
+    form_class = RAForm
+    template_name = 'cursos/addRA.html'
+
+    def get_success_url(self):
+        return reverse('landingRA', kwargs={'pk' : ResultadoDeAprendizaje.objects.values_list('Competencia_id', flat= True).get(pk= self.kwargs['pk'])})
+
+    def get_initial(self):
+        return {'Verbo': ResultadoDeAprendizaje.objects.values_list('Verbo', flat= True).get(pk= self.kwargs['pk']),
+                'Contenidos': ResultadoDeAprendizaje.objects.values_list('Contenidos', flat=True).get(pk=self.kwargs['pk']),
+                'Contexto': ResultadoDeAprendizaje.objects.values_list('Contexto', flat=True).get(pk=self.kwargs['pk']),
+                'Proposito': ResultadoDeAprendizaje.objects.values_list('Proposito', flat=True).get(pk=self.kwargs['pk']),
+                'Competencia': ResultadoDeAprendizaje.objects.values_list('Competencia_id', flat= True).get(pk= self.kwargs['pk'])}
+
+
+class RADelete(DeleteView):
+    model = ResultadoDeAprendizaje
+    template_name = 'cursos/deleteRA.html'
+
+    def get_success_url(self):
+        return reverse('landingRA', kwargs={'pk' : ResultadoDeAprendizaje.objects.values_list('Competencia_id', flat= True).get(pk= self.kwargs['pk'])})
+
+    def get_context_data(self, **kwargs):
+        this_name = self.kwargs['pk']
+        context = super(RADelete, self).get_context_data(**kwargs)
+        context['Competencias'] = Competencias.objects.get(pk= ResultadoDeAprendizaje.objects.values_list('Competencia_id',flat=True).get(pk= this_name))
+        context['Resultados'] = ResultadoDeAprendizaje.objects.get(pk= this_name)
+        return context
 
 
 

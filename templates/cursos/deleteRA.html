@@ -1,0 +1,11 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+<form method="post">
+	{% csrf_token %}
+	<h3>¿Desea eliminar el resultado de aprendizaje "{{ Resultados.Verbo }} {{ Resultados.Contenidos }}, {{ Resultados.Contexto }},
+        {{ Resultados.Proposito }}" de la competencia {{ Competencias.Nombre }}?</h3>
+	<button class="btn btn-danger" type="submit">Sí, eliminar</button>
+	<a class= "btn btn-default" href="{% url 'landingRA'  Competencias.id  %} ">Cancelar</a>
+</form>
+{% endblock %}

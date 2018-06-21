@@ -4,7 +4,7 @@
     Cursos
 {% endblock %}
 {% block content %}
-    <a href="#" class="pull-right btn btn-success" role="button">Agregar</a>
+    <a href="/cursos/addRA/{{ Compe.id }}" class="pull-right btn btn-success" role="button">Agregar</a>
 
         <table class="text-center table table-bordered">
 
@@ -24,6 +24,8 @@
                     <tr>
                         <td>{{ RA.Verbo }} {{ RA.Contenidos }}, {{ RA.Contexto }}, {{ RA.Proposito }}</td>
                         <td>
+                            <a class="btn btn-info btn-sm" href="{% url 'updateRA' RA.id %}">Editar</a>
+                            <a class="btn btn-danger btn-sm" href="{% url 'deleteRA' RA.id %}">Eliminar</a>
 
 
                         </td>

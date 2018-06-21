@@ -10,5 +10,8 @@ urlpatterns = [
     path('addCompe/<int:pk>', CompetenciaCreate.as_view(), name='addCompe'),
     path('updateCompe/<int:pk>', CompetenciaUpdate.as_view(), name='updateCompe'),
     path('deleteCompe/<int:pk>', CompetenciaDelete.as_view(), name='deleteCompe'),
-    path('RA/<int:pk>',  RAList.as_view(), name= 'landingRA')
+    path('RA/<int:pk>',  RAList.as_view(), name= 'landingRA'),
+    path('addRA/<int:pk>',  RACreate.as_view(), name= 'addRA'),
+    path('updateRA/<int:pk>',  RAUpdate.as_view(), name= 'updateRA'),
+    path('deleteRA/<int:pk>',  RADelete.as_view(), name= 'deleteRA'),
 ]
