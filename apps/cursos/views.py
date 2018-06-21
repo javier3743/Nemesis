@@ -94,7 +94,7 @@ class RAList(ListView):
     def get_context_data(self, **kwargs):
         this_name = self.kwargs['pk']
         context = super(RAList, self).get_context_data(**kwargs)
-        context['tags'] = Curso.objects.get(pk= this_name)
+        context['Compe'] = Competencias.objects.get(pk= this_name)
         return context
 
 
