@@ -4,7 +4,7 @@
     Cursos
 {% endblock %}
 {% block content %}
-    <a href="/cursos/addADE/{{ RA.id }}" class="pull-right btn btn-success" role="button">Agregar</a>
+    <a href="/cursos/addADE/{{ IL.id }}" class="pull-right btn btn-success" role="button">Agregar</a>
 
         <table class="text-center table table-bordered">
 
@@ -19,15 +19,15 @@
         </thead>
         <tbody>
         {% if object_list %}
-            <h1> Actividades de evaluacion para "{{ RA.Verbo }} {{ RA.Contenidos }}, {{ RA.Contexto }}, {{ RA.Proposito }}" </h1>
-            {% for ADF in object_list %}
-                {% if ADF.RA_id ==  RA.id  %}
+            <h1> Actividades de evaluacion para "{{ IL.Habilidad }} {{ IL.Contenido }} {{ IL.Contexto }}" </h1>
+            {% for ADE in object_list %}
+                {% if ADE.RA_id ==  RA.id  %}
                     <tr>
-                        <td>{{ ADF.Nombre }}</td>
-                        <td>{{ ADF.Descripcion }}</td>
+                        <td>{{ ADE.Nombre }}</td>
+                        <td>{{ ADE.Descripcion }}</td>
                         <td>
-                            <a class="btn btn-info btn-sm" href="{% url 'updateADF' ADF.id %}">Editar</a>
-                            <a class="btn btn-danger btn-sm" href="{% url 'deleteADF' ADF.id %}">Eliminar</a>
+                            <a class="btn btn-info btn-sm" href="{% url 'updateADE' ADE.id %}">Editar</a>
+                            <a class="btn btn-danger btn-sm" href="{% url 'deleteADE' ADE.id %}">Eliminar</a>
                         </td>
                     </tr>
                 {% endif %}

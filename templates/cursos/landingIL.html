@@ -25,6 +25,7 @@
                         <td>{{ IL.Habilidad }} {{ IL.Contenido }} {{ IL.Contexto }}</td>
                         <td>
                             <a class="btn btn-info btn-sm" href="{% url 'updateIL' IL.id %}">Editar</a>
+                            <a class="btn btn-info btn-sm" href="{% url 'landingADE' IL.id %}">ADE</a>
                             <a class="btn btn-danger btn-sm" href="{% url 'deleteIL' IL.id %}">Eliminar</a>
                         </td>
                     </tr>

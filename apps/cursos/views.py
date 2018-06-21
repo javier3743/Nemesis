@@ -213,7 +213,7 @@ class ADFCreate(CreateView):
 class ADFUpdate(UpdateView):
     model = ActividadesDeFormacion
     form_class = ADFForm
-    template_name = 'cursos/addIL.html'
+    template_name = 'cursos/addADF.html'
 
     def get_success_url(self):
         return reverse('landingADF', kwargs={'pk' : ActividadesDeFormacion.objects.values_list('RA_id', flat= True).get(pk= self.kwargs['pk'])})
@@ -244,5 +244,43 @@ class ADEList(ListView):
     def get_context_data(self, **kwargs):
         this_name = self.kwargs['pk']
         context = super(ADEList, self).get_context_data(**kwargs)
-        context['RA'] = ResultadoDeAprendizaje.objects.get(pk= this_name)
+        context['IL'] = IndicadoresDeLogro.objects.get(pk= this_name)
+        return context
+
+class ADECreate(CreateView):
+    model = ActividadesDeEvaluacion
+    form_class = ADEForm
+    template_name = 'cursos/addADE.html'
+
+    def get_success_url(self):
+        return reverse('landingADE', kwargs={'pk': self.kwargs['pk']})
+
+    def get_initial(self):
+        return {'RA': self.kwargs['pk']}
+
+class ADEUpdate(UpdateView):
+    model = IndicadoresDeLogro
+    form_class = ADEForm
+    template_name = 'cursos/addIL.html'
+
+    def get_success_url(self):
+        return reverse('landingADF', kwargs={'pk' : ActividadesDeFormacion.objects.values_list('RA_id', flat= True).get(pk= self.kwargs['pk'])})
+
+    def get_initial(self):
+        return {'Nombre': ActividadesDeFormacion.objects.values_list('Nombre', flat= True).get(pk= self.kwargs['pk']),
+                'Descripcion': ActividadesDeFormacion.objects.values_list('Descripcion', flat=True).get(pk=self.kwargs['pk']),
+                'RA': ActividadesDeFormacion.objects.values_list('RA_id', flat= True).get(pk= self.kwargs['pk'])}
+
+class ADEDelete(DeleteView):
+    model = IndicadoresDeLogro
+    template_name = 'cursos/deleteADE.html'
+
+    def get_success_url(self):
+        return reverse('landingADE', kwargs={'pk' : ActividadesDeFormacion.objects.values_list('RA_id', flat= True).get(pk= self.kwargs['pk'])})
+
+    def get_context_data(self, **kwargs):
+        this_name = self.kwargs['pk']
+        context = super(ADEDelete, self).get_context_data(**kwargs)
+        context['Resultados'] = ResultadoDeAprendizaje.objects.get(pk= ActividadesDeFormacion.objects.values_list('RA_id',flat=True).get(pk= this_name))
+        context['Actividad'] = ActividadesDeFormacion.objects.get(pk= this_name)
         return context

@@ -3,9 +3,8 @@
 {% block content %}
 <form method="post">
 	{% csrf_token %}
-	<h3>¿Desea eliminar el actividad de evaluacion "{{ Resultados.Verbo }} {{ Resultados.Contenidos }}, {{ Resultados.Contexto }},
-        {{ Resultados.Proposito }}" de la competencia {{ Competencias.Nombre }}?</h3>
-	<button class="btn btn-danger" type="submit">Sí, eliminar</button>
-	<a class= "btn btn-default" href="{% url 'landingRA'  Competencias.id  %} ">Cancelar</a>
+	<h3>¿Desea eliminar la actividad de evaluacion "{{ ADE.Nombre }} {{ ADE.Descripcion }}" de el indicador de logros "{{ IL.Habilidad }} {{ IL.Contenido }} {{ IL.Contexto }}"?</h3>
+	<button class="btn btn-danger" type="submit">Sí, Eliminar</button>
+	<a class= "btn btn-default" href="{% url 'landingIL'  Resultados.id  %} ">Cancelar</a>
 </form>
 {% endblock %}

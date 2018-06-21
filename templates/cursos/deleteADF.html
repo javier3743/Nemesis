@@ -3,7 +3,7 @@
 {% block content %}
 <form method="post">
 	{% csrf_token %}
-	<h3>¿Desea eliminar la actividad de formacion "{{ Indicadores.Habilidad }} {{ Indicadores.Contenido }} {{ Indicadores.Contexto }}" de el resultado de aprendizaje "{{ Resultados.Verbo }} {{ Resultados.Contenidos }}, {{ Resultados.Contexto }},
+	<h3>¿Desea eliminar la actividad de formacion "{{ ADE.Nombre }} {{ ADE.Descripcion }}" de el resultado de aprendizaje "{{ Resultados.Verbo }} {{ Resultados.Contenidos }}, {{ Resultados.Contexto }},
         {{ Resultados.Proposito }}"?</h3>
 	<button class="btn btn-danger" type="submit">Sí, Eliminar</button>
 	<a class= "btn btn-default" href="{% url 'landingIL'  Resultados.id  %} ">Cancelar</a>

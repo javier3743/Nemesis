@@ -118,3 +118,12 @@ class ADFForm(forms.ModelForm):
     Nombre = forms.Field(widget=forms.TextInput(attrs={'class': 'form-control'}), label='Nombre')
     Descripcion = forms.Field(widget=forms.Textarea(attrs={'class': 'form-control'}), label='Descripcion')
     RA = forms.ModelChoiceField(ResultadoDeAprendizaje.objects.all(), widget=forms.HiddenInput)
+
+class ADEForm(forms.ModelForm):
+    class Meta:
+        model = ActividadesDeEvaluacion
+        fields = ['Nombre', 'Descripcion', 'IL']
+
+    Nombre = forms.Field(widget=forms.TextInput(attrs={'class': 'form-control'}), label='Nombre')
+    Descripcion = forms.Field(widget=forms.Textarea(attrs={'class': 'form-control'}), label='Descripcion')
+    IL = forms.ModelChoiceField(IndicadoresDeLogro.objects.all(), widget=forms.HiddenInput)
