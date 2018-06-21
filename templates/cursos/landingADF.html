@@ -1,0 +1,41 @@
+{% extends 'base/base.html' %}
+
+{% block title %}
+    Cursos
+{% endblock %}
+{% block content %}
+    <a href="/cursos/addADF/{{ RA.id }}" class="pull-right btn btn-success" role="button">Agregar</a>
+
+        <table class="text-center table table-bordered">
+
+        <thead>
+        <tr>
+            <td>Nombre</td>
+            <td>Descripcion</td>
+            <td>Acciones</td>
+
+        </tr>
+
+        </thead>
+        <tbody>
+        {% if object_list %}
+            <h1> Actividades de formacion para "{{ RA.Verbo }} {{ RA.Contenidos }}, {{ RA.Contexto }}, {{ RA.Proposito }}" </h1>
+            {% for ADF in object_list %}
+                {% if ADF.RA_id ==  RA.id  %}
+                    <tr>
+                        <td>{{ ADF.Nombre }}</td>
+                        <td>{{ ADF.Descripcion }}</td>
+                        <td>
+                            <a class="btn btn-info btn-sm" href="{% url 'updateADF' ADF.id %}">Editar</a>
+                            <a class="btn btn-danger btn-sm" href="{% url 'deleteADF' ADF.id %}">Eliminar</a>
+                        </td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+
+        {% else %}
+
+        {% endif %}
+        </tbody>
+    </table>
+{% endblock %}

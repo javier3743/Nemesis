@@ -100,3 +100,21 @@ class RAForm(forms.ModelForm):
     Proposito = forms.Field(widget=forms.TextInput(attrs={'class': 'form-control'}), label= 'Proposito')
     Competencia = forms.ModelChoiceField(Competencias.objects.all(), widget=forms.HiddenInput)
 
+class ILForm(forms.ModelForm):
+    class Meta:
+        model = IndicadoresDeLogro
+        fields= ['Habilidad', 'Contenido', 'Contexto', 'RA']
+
+    Habilidad = forms.Field(widget=forms.TextInput(attrs={'class': 'form-control'}), label= 'Habilidad')
+    Contenido = forms.Field(widget=forms.TextInput(attrs={'class': 'form-control'}), label='Contenido')
+    Contexto = forms.Field(widget=forms.TextInput(attrs={'class': 'form-control'}), label='Contexto')
+    RA = forms.ModelChoiceField(ResultadoDeAprendizaje.objects.all(), widget=forms.HiddenInput)
+
+class ADFForm(forms.ModelForm):
+    class Meta:
+        model = ActividadesDeFormacion
+        fields = ['Nombre', 'Descripcion', 'RA']
+
+    Nombre = forms.Field(widget=forms.TextInput(attrs={'class': 'form-control'}), label='Nombre')
+    Descripcion = forms.Field(widget=forms.Textarea(attrs={'class': 'form-control'}), label='Descripcion')
+    RA = forms.ModelChoiceField(ResultadoDeAprendizaje.objects.all(), widget=forms.HiddenInput)

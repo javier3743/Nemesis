@@ -1,0 +1,39 @@
+{% extends 'base/base.html' %}
+
+{% block title %}
+    Cursos
+{% endblock %}
+{% block content %}
+    <a href="/cursos/addIL/{{ RA.id }}" class="pull-right btn btn-success" role="button">Agregar</a>
+
+        <table class="text-center table table-bordered">
+
+        <thead>
+        <tr>
+            <td>Indicador de Logro</td>
+            <td>Acciones</td>
+
+        </tr>
+
+        </thead>
+        <tbody>
+        {% if object_list %}
+            <h1> Indicadores de logro para "{{ RA.Verbo }} {{ RA.Contenidos }}, {{ RA.Contexto }}, {{ RA.Proposito }}" </h1>
+            {% for IL in object_list %}
+                {% if IL.RA_id ==  RA.id  %}
+                    <tr>
+                        <td>{{ IL.Habilidad }} {{ IL.Contenido }} {{ IL.Contexto }}</td>
+                        <td>
+                            <a class="btn btn-info btn-sm" href="{% url 'updateIL' IL.id %}">Editar</a>
+                            <a class="btn btn-danger btn-sm" href="{% url 'deleteIL' IL.id %}">Eliminar</a>
+                        </td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+
+        {% else %}
+
+        {% endif %}
+        </tbody>
+    </table>
+{% endblock %}

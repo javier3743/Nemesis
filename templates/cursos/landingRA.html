@@ -18,14 +18,17 @@
         </thead>
         <tbody>
         {% if object_list %}
-            <h1> Competencias para {{ Compe.Competencia }} </h1>
+            <h1> Resultados de aprendizaje para "{{ Compe.Competencia }}" </h1>
             {% for RA in object_list %}
                 {% if RA.Competencia_id ==  Compe.id  %}
                     <tr>
                         <td>{{ RA.Verbo }} {{ RA.Contenidos }}, {{ RA.Contexto }}, {{ RA.Proposito }}</td>
                         <td>
                             <a class="btn btn-info btn-sm" href="{% url 'updateRA' RA.id %}">Editar</a>
+                            <a class="btn btn-info btn-sm" href="{% url 'landingIL' RA.id %}">IL</a>
+                            <a class="btn btn-info btn-sm" href="{% url 'landingADF' RA.id %}">ADF</a>
                             <a class="btn btn-danger btn-sm" href="{% url 'deleteRA' RA.id %}">Eliminar</a>
+
 
 
                         </td>
