@@ -1,0 +1,40 @@
+{% extends 'base/base.html' %}
+
+{% block title %}
+    Cursos
+{% endblock %}
+{% block content %}
+    <a href="/escuelas/add" class="pull-right btn btn-success" role="button">Agregar</a>
+    <table class="text-center table table-bordered">
+
+        <thead>
+        <tr>
+
+            <td>Nombre</td>
+            <td>Facultad</td>
+            <td>Acciones</td>
+
+        </tr>
+
+        </thead>
+        <tbody>
+        {% if object_list %}
+            <h1> Escuelas Registradas </h1>
+            {% for escuela in object_list %}
+                <tr>
+                    <td>{{ escuela.Nombre }}</td>
+                    <td>{{ escuela.Facultad }}</td>
+                    <td>
+                        <a class="btn btn-info" href="{% url 'updateEscuela' escuela.id %}">Editar</a>
+                        <a class="btn btn-danger" href="{% url 'deleteEscuela' escuela.id %}">Eliminar</a>
+                    </td>
+                </tr>
+
+            {% endfor %}
+
+        {% else %}
+            <h1>No hay escuelas Registradas</h1>
+        {% endif %}
+        </tbody>
+    </table>
+{% endblock %}

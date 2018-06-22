@@ -10,6 +10,8 @@ urlpatterns = [
     path('director', DirectorCreate.as_view(), name='director'),
     path('decano', DeanCreate.as_view(), name='deacano'),
     path('delete/<int:pk>', UserDelete.as_view(), name='deleteUser'),
-    path('update/<int:pk>', UserUpdate.as_view(), name='updateUser'),
+    path('updatePro/<int:pk>', ProfesorUpdate.as_view(), name='updateProfesor'),
+    path('updateDir/<int:pk>', DirectorUpdate.as_view(), name='updateDirector'),
+    path('updateDea/<int:pk>', DeanUpdate.as_view(), name='updateDean'),
 
 ]

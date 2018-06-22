@@ -239,7 +239,7 @@ class ADFDelete(DeleteView):
 
 class ADEList(ListView):
     model = ActividadesDeEvaluacion
-    template_name = 'cursos/landingADF.html'
+    template_name = 'cursos/landingADE.html'
 
     def get_context_data(self, **kwargs):
         this_name = self.kwargs['pk']
@@ -256,31 +256,31 @@ class ADECreate(CreateView):
         return reverse('landingADE', kwargs={'pk': self.kwargs['pk']})
 
     def get_initial(self):
-        return {'RA': self.kwargs['pk']}
+        return {'IL': self.kwargs['pk']}
 
 class ADEUpdate(UpdateView):
-    model = IndicadoresDeLogro
+    model = ActividadesDeEvaluacion
     form_class = ADEForm
-    template_name = 'cursos/addIL.html'
+    template_name = 'cursos/addADE.html'
 
     def get_success_url(self):
-        return reverse('landingADF', kwargs={'pk' : ActividadesDeFormacion.objects.values_list('RA_id', flat= True).get(pk= self.kwargs['pk'])})
+        return reverse('landingADE', kwargs={'pk' : ActividadesDeEvaluacion.objects.values_list('IL_id', flat= True).get(pk= self.kwargs['pk'])})
 
     def get_initial(self):
-        return {'Nombre': ActividadesDeFormacion.objects.values_list('Nombre', flat= True).get(pk= self.kwargs['pk']),
-                'Descripcion': ActividadesDeFormacion.objects.values_list('Descripcion', flat=True).get(pk=self.kwargs['pk']),
-                'RA': ActividadesDeFormacion.objects.values_list('RA_id', flat= True).get(pk= self.kwargs['pk'])}
+        return {'Nombre': ActividadesDeEvaluacion.objects.values_list('Nombre', flat= True).get(pk= self.kwargs['pk']),
+                'Descripcion': ActividadesDeEvaluacion.objects.values_list('Descripcion', flat=True).get(pk=self.kwargs['pk']),
+                'RA': ActividadesDeEvaluacion.objects.values_list('IL_id', flat= True).get(pk= self.kwargs['pk'])}
 
 class ADEDelete(DeleteView):
-    model = IndicadoresDeLogro
+    model = ActividadesDeEvaluacion
     template_name = 'cursos/deleteADE.html'
 
     def get_success_url(self):
-        return reverse('landingADE', kwargs={'pk' : ActividadesDeFormacion.objects.values_list('RA_id', flat= True).get(pk= self.kwargs['pk'])})
+        return reverse('landingADE', kwargs={'pk' : ActividadesDeEvaluacion.objects.values_list('IL_id', flat= True).get(pk= self.kwargs['pk'])})
 
     def get_context_data(self, **kwargs):
         this_name = self.kwargs['pk']
         context = super(ADEDelete, self).get_context_data(**kwargs)
-        context['Resultados'] = ResultadoDeAprendizaje.objects.get(pk= ActividadesDeFormacion.objects.values_list('RA_id',flat=True).get(pk= this_name))
-        context['Actividad'] = ActividadesDeFormacion.objects.get(pk= this_name)
+        context['Indicadores'] = IndicadoresDeLogro.objects.get(pk= ActividadesDeEvaluacion.objects.values_list('IL_id',flat=True).get(pk= this_name))
+        context['Actividad'] = ActividadesDeEvaluacion.objects.get(pk= this_name)
         return context

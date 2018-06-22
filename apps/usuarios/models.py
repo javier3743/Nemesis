@@ -18,6 +18,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_teacher = models.BooleanField('teacher status', default=False)
     is_dean = models.BooleanField('dean status', default=False)
     programa = models.ForeignKey(ProgramaAcademico, null=True, blank=False, on_delete=models.CASCADE)
+    escuela = models.ForeignKey(Escuela, null=True, blank=False, on_delete=models.CASCADE)
     facultad = models.ForeignKey(Facultad, null=True, blank=False, on_delete=models.CASCADE)
     is_superuser = models.BooleanField(('superuser status'),default=False,)
     objects = UserManager()

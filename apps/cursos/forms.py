@@ -44,7 +44,7 @@ class CursoForm(forms.ModelForm):
             'HorasDeClaseMagistral': forms.TextInput(attrs={'class': 'form-control'}),
             'NumHorasEstudio': forms.TextInput(attrs={'class': 'form-control'}),
             'TipoDeCurso': forms.Select(attrs={'class': 'form-control'}),
-            'AsigPrerrequisitos': Select2MultipleWidget(),
+            'AsigPrerrequisitos': Select2MultipleWidget(attrs={'class': 'form-control'}),
             'Validable': forms.Select(attrs={'class': 'form-control'}),
             'Habilitable': forms.Select(attrs={'class': 'form-control'}),
             'Programa': forms.Select(attrs={'class': 'form-control'}),
@@ -94,8 +94,8 @@ class RAForm(forms.ModelForm):
         fields = ['Verbo', 'Contenidos', 'Contexto', 'Proposito', 'Competencia']
 
 
-    Verbo = forms.Field(widget=forms.TextInput(attrs={'class': 'form-control'}), label= 'Verbo')
-    Contenidos = forms.Field(widget=forms.TextInput(attrs={'class': 'form-control'}), label= 'Contenido')
+    Verbo = forms.Field(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder':''}), label= 'Verbo')
+    Contenidos = forms.Field(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder':'tema o herramienta sobre el que se trabaja'}), label= 'Contenido')
     Contexto = forms.Field(widget=forms.TextInput(attrs={'class': 'form-control'}), label= 'Contexto')
     Proposito = forms.Field(widget=forms.TextInput(attrs={'class': 'form-control'}), label= 'Proposito')
     Competencia = forms.ModelChoiceField(Competencias.objects.all(), widget=forms.HiddenInput)

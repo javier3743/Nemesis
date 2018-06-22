@@ -5,7 +5,7 @@
 {% endblock %}
 {% block content %}
     <h1>Desea Crear Un Usuario De Tipo:</h1>
-<a class="btn btn-info" href="{% url 'profesor' %}">Profesor</a>
+    <a class="btn btn-info" href="{% url 'profesor' %}">Profesor</a>
     <a class="btn btn-info" href="{% url 'director' %}">Director</a>
     <a class="btn btn-info" href="{% url 'deacano' %}">Decano</a>
     <table class="text-center table table-bordered">
@@ -28,8 +28,19 @@
                     <td>{{ users.get_full_name }}</td>
                     <td>{{ users.get_type }}</td>
                     <td>
-                        <a class="btn btn-info" href="{% url 'updateUser' users.id %}">Editar</a>
-                        <a class="btn btn-danger" href="{% url 'deleteUser' users.id %}">Eliminar</a>
+                        {% if users.is_teacher %}
+                            <a class="btn btn-info" href="{% url 'updateProfesor' users.id %}">Editar</a>
+                        {% endif %}
+                        {% if users.is_director %}
+                            <a class="btn btn-info" href="{% url 'updateDirector' users.id %}">Editar</a>
+                        {% endif %}
+                        {% if users.is_dean %}
+                            <a class="btn btn-info" href="{% url 'updateDean' users.id %}">Editar</a>
+                        {% endif %}
+                        {% if users.is_superuser == False%}
+                            <a class="btn btn-danger" href="{% url 'deleteUser' users.id %}">Eliminar</a>
+                        {% endif %}
+
                     </td>
                 </tr>
 

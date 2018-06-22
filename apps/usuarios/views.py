@@ -44,7 +44,7 @@ class DeanCreate(CreateView):
     model = User
     form_class = Deanform
     template_name = 'usuarios/addUser.html'
-    success_url = '/'
+    success_url = '/admin'
 
     def get_context_data(self, **kwargs):
         kwargs['user_type'] = 'Dean'
@@ -60,12 +60,46 @@ class UserDelete(DeleteView):
 
 
 @method_decorator([login_required, admin_required], name='dispatch')
-class UserUpdate(UpdateView):
+class ProfesorUpdate(UpdateView):
     model = User
-    form_class = Profesorform
+    form_class = ProfesorUpdateForm
     template_name = 'usuarios/addUser.html'
     success_url = '/admin'
 
+    def get_initial(self):
+        return {'email': User.objects.values_list('email', flat= True).get(pk= self.kwargs['pk']),
+                'nombre': User.objects.values_list('first_name', flat=True).get(pk=self.kwargs['pk']),
+                'apellido': User.objects.values_list('last_name', flat=True).get(pk=self.kwargs['pk']),
+                'escuela': User.objects.values_list('escuela', flat= True).get(pk= self.kwargs['pk']),
+                }
+
+@method_decorator([login_required, admin_required], name='dispatch')
+class DirectorUpdate(UpdateView):
+    model = User
+    form_class = DirectorUpdateForm
+    template_name = 'usuarios/addUser.html'
+    success_url = '/admin'
+
+    def get_initial(self):
+        return {'email': User.objects.values_list('email', flat= True).get(pk= self.kwargs['pk']),
+                'nombre': User.objects.values_list('first_name', flat=True).get(pk=self.kwargs['pk']),
+                'apellido': User.objects.values_list('last_name', flat=True).get(pk=self.kwargs['pk']),
+                'programa': User.objects.values_list('programa', flat= True).get(pk= self.kwargs['pk']),
+                }
+
+@method_decorator([login_required, admin_required], name='dispatch')
+class DeanUpdate(UpdateView):
+    model = User
+    form_class = DeanUpdateForm
+    template_name = 'usuarios/addUser.html'
+    success_url = '/admin'
+
+    def get_initial(self):
+        return {'email': User.objects.values_list('email', flat= True).get(pk= self.kwargs['pk']),
+                'nombre': User.objects.values_list('first_name', flat=True).get(pk=self.kwargs['pk']),
+                'apellido': User.objects.values_list('last_name', flat=True).get(pk=self.kwargs['pk']),
+                'facultad': User.objects.values_list('facultad', flat= True).get(pk= self.kwargs['pk']),
+                }
 
 @method_decorator([login_required, admin_required], name='dispatch')
 class AllUsers(ListView):

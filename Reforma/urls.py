@@ -22,6 +22,7 @@ urlpatterns = [
     path('', index, name = 'home'),
    # path('admina/', admin.site.urls),
     path('programas/', include('apps.programas.urls'), name ='programas'),
+    path('escuelas/', include('apps.escuela.urls'), name ='escuelas'),
     path('cursos/', include('apps.cursos.urls'), name='curso'),
     path('admin/',include('apps.usuarios.urls'), name = 'usuarios'),
     path('login/', login, {'template_name': 'login.html'}, name='login'),

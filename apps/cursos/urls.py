@@ -28,7 +28,7 @@ urlpatterns = [
     path('deleteADF/<int:pk>', ADFDelete.as_view(), name='deleteADF'),
 
     path('landingADE/<int:pk>', ADEList.as_view(), name='landingADE'),
-   # path('addADE/<int:pk>', ADECreate.as_view(), name='addADE'),
-    ##path('updateADE/<int:pk>', ADEUpdate.as_view(), name='updateADE'),
-    #path('deleteADE/<int:pk>', ADEDelete.as_view(), name='deleteADE'),
+    path('addADE/<int:pk>', ADECreate.as_view(), name='addADE'),
+    path('updateADE/<int:pk>', ADEUpdate.as_view(), name='updateADE'),
+    path('deleteADE/<int:pk>', ADEDelete.as_view(), name='deleteADE'),
 ]

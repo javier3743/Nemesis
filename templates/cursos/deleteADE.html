@@ -3,8 +3,8 @@
 {% block content %}
 <form method="post">
 	{% csrf_token %}
-	<h3>¿Desea eliminar la actividad de evaluacion "{{ ADE.Nombre }} {{ ADE.Descripcion }}" de el indicador de logros "{{ IL.Habilidad }} {{ IL.Contenido }} {{ IL.Contexto }}"?</h3>
+	<h3>¿Desea eliminar la actividad de evaluacion "{{ Actividad.Nombre }} {{ Actividad.Descripcion }}" de el indicador de logros "{{ Indicadores.HabIndicadoresidad }} {{ Indicadores.Contenido }} {{ Indicadores.Contexto }}"?</h3>
 	<button class="btn btn-danger" type="submit">Sí, Eliminar</button>
-	<a class= "btn btn-default" href="{% url 'landingIL'  Resultados.id  %} ">Cancelar</a>
+	<a class= "btn btn-default" href="{% url 'landingADE'  Indicadores.id  %} ">Cancelar</a>
 </form>
 {% endblock %}
