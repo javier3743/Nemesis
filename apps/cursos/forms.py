@@ -34,7 +34,6 @@ class CursoForm(forms.ModelForm):
             'Habilitable': 'Habilitable',
             'Programa': 'Programa Academico',
             'NumSemestreUbic': 'Ubicacion Semestral ',
-            'Profesor': 'Profesor'
 
         }
         widgets = {
@@ -44,14 +43,15 @@ class CursoForm(forms.ModelForm):
             'HorasDeClaseMagistral': forms.TextInput(attrs={'class': 'form-control'}),
             'NumHorasEstudio': forms.TextInput(attrs={'class': 'form-control'}),
             'TipoDeCurso': forms.Select(attrs={'class': 'form-control'}),
-            'AsigPrerrequisitos': Select2MultipleWidget(attrs={'class': 'form-control'}),
+            'AsigPrerrequisitos': Select2MultipleWidget(attrs={'class': 'form-control'} ),
             'Validable': forms.Select(attrs={'class': 'form-control'}),
             'Habilitable': forms.Select(attrs={'class': 'form-control'}),
             'Programa': forms.Select(attrs={'class': 'form-control'}),
             'NumSemestreUbic': forms.TextInput(attrs={'class': 'form-control'}),
-            'Profesor': forms.Select(attrs={'class': 'form-control'})
 
         }
+
+    Profesor = forms.ModelChoiceField(User.objects.all(), widget=forms.HiddenInput)
 
     def clean(self):
         cleaned_data = super(CursoForm, self).clean()

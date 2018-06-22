@@ -24,6 +24,9 @@ class CursoCreate(CreateView):
     template_name = 'cursos/addCursos.html'
     success_url = '/cursos'
 
+    def get_initial(self):
+        return {'Profesor': self.request.user}
+
 
 @method_decorator([login_required, cursos_required], name='dispatch')
 class CursoDelete(DeleteView):
@@ -39,7 +42,7 @@ class CursoUpdate(UpdateView):
     template_name = 'cursos/addCursos.html'
     success_url = '/cursos'
 
-
+@method_decorator([login_required, cursos_required], name='dispatch')
 class CursoDesign(ListView):
     model = Competencias
     template_name = 'cursos/landingCompe.html'
@@ -50,6 +53,7 @@ class CursoDesign(ListView):
         context['tags'] = Curso.objects.get(pk= this_name)
         return context
 
+@method_decorator([login_required, cursos_required], name='dispatch')
 class CompetenciaCreate(CreateView):
     model = Competencias
     form_class = CompeForm
@@ -61,6 +65,7 @@ class CompetenciaCreate(CreateView):
     def get_initial(self):
         return { 'Curso':  self.kwargs['pk']}
 
+@method_decorator([login_required, cursos_required], name='dispatch')
 class CompetenciaUpdate(UpdateView):
     model = Competencias
     form_class = CompeForm
@@ -73,6 +78,7 @@ class CompetenciaUpdate(UpdateView):
         return {'Competencia': Competencias.objects.values_list('Competencia', flat= True).get(pk= self.kwargs['pk']),
                'Curso': Competencias.objects.values_list('Curso_id', flat= True).get(pk= self.kwargs['pk'])}
 
+@method_decorator([login_required, cursos_required], name='dispatch')
 class CompetenciaDelete(DeleteView):
     model = Competencias
     template_name = 'cursos/deleteCompe.html'
@@ -87,6 +93,7 @@ class CompetenciaDelete(DeleteView):
         context['Competencias'] = Competencias.objects.get(pk= this_name)
         return context
 
+@method_decorator([login_required, cursos_required], name='dispatch')
 class RAList(ListView):
     model = ResultadoDeAprendizaje
     template_name = 'cursos/landingRA.html'
@@ -97,6 +104,7 @@ class RAList(ListView):
         context['Compe'] = Competencias.objects.get(pk= this_name)
         return context
 
+@method_decorator([login_required, cursos_required], name='dispatch')
 class RACreate(CreateView):
     model = ResultadoDeAprendizaje
     form_class = RAForm
@@ -108,6 +116,7 @@ class RACreate(CreateView):
     def get_initial(self):
         return {'Competencia': self.kwargs['pk']}
 
+@method_decorator([login_required, cursos_required], name='dispatch')
 class RAUpdate(UpdateView):
     model = ResultadoDeAprendizaje
     form_class = RAForm
@@ -123,7 +132,7 @@ class RAUpdate(UpdateView):
                 'Proposito': ResultadoDeAprendizaje.objects.values_list('Proposito', flat=True).get(pk=self.kwargs['pk']),
                 'Competencia': ResultadoDeAprendizaje.objects.values_list('Competencia_id', flat= True).get(pk= self.kwargs['pk'])}
 
-
+@method_decorator([login_required, cursos_required], name='dispatch')
 class RADelete(DeleteView):
     model = ResultadoDeAprendizaje
     template_name = 'cursos/deleteRA.html'
@@ -138,6 +147,7 @@ class RADelete(DeleteView):
         context['Resultados'] = ResultadoDeAprendizaje.objects.get(pk= this_name)
         return context
 
+@method_decorator([login_required, cursos_required], name='dispatch')
 class ILList(ListView):
     model = IndicadoresDeLogro
     template_name = 'cursos/landingIL.html'
@@ -148,6 +158,7 @@ class ILList(ListView):
         context['RA'] = ResultadoDeAprendizaje.objects.get(pk= this_name)
         return context
 
+@method_decorator([login_required, cursos_required], name='dispatch')
 class ILCreate(CreateView):
     model = IndicadoresDeLogro
     form_class = ILForm
@@ -159,6 +170,7 @@ class ILCreate(CreateView):
     def get_initial(self):
         return {'RA': self.kwargs['pk']}
 
+@method_decorator([login_required, cursos_required], name='dispatch')
 class ILUpdate(UpdateView):
     model = IndicadoresDeLogro
     form_class = ILForm
@@ -173,7 +185,7 @@ class ILUpdate(UpdateView):
                 'Contexto': IndicadoresDeLogro.objects.values_list('Contexto', flat=True).get(pk=self.kwargs['pk']),
                 'RA': IndicadoresDeLogro.objects.values_list('RA_id', flat= True).get(pk= self.kwargs['pk'])}
 
-
+@method_decorator([login_required, cursos_required], name='dispatch')
 class ILDelete(DeleteView):
     model = IndicadoresDeLogro
     template_name = 'cursos/deleteIL.html'
@@ -188,7 +200,7 @@ class ILDelete(DeleteView):
         context['Indicadores'] = IndicadoresDeLogro.objects.get(pk= this_name)
         return context
 
-
+@method_decorator([login_required, cursos_required], name='dispatch')
 class ADFList(ListView):
     model = ActividadesDeFormacion
     template_name = 'cursos/landingADF.html'
@@ -198,7 +210,7 @@ class ADFList(ListView):
         context = super(ADFList, self).get_context_data(**kwargs)
         context['RA'] = ResultadoDeAprendizaje.objects.get(pk= this_name)
         return context
-
+@method_decorator([login_required, cursos_required], name='dispatch')
 class ADFCreate(CreateView):
     model = ActividadesDeFormacion
     form_class = ADFForm
@@ -210,6 +222,7 @@ class ADFCreate(CreateView):
     def get_initial(self):
         return {'RA': self.kwargs['pk']}
 
+@method_decorator([login_required, cursos_required], name='dispatch')
 class ADFUpdate(UpdateView):
     model = ActividadesDeFormacion
     form_class = ADFForm
@@ -223,6 +236,7 @@ class ADFUpdate(UpdateView):
                 'Descripcion': ActividadesDeFormacion.objects.values_list('Descripcion', flat=True).get(pk=self.kwargs['pk']),
                 'RA': ActividadesDeFormacion.objects.values_list('RA_id', flat= True).get(pk= self.kwargs['pk'])}
 
+@method_decorator([login_required, cursos_required], name='dispatch')
 class ADFDelete(DeleteView):
     model = ActividadesDeFormacion
     template_name = 'cursos/deleteADF.html'
@@ -237,6 +251,7 @@ class ADFDelete(DeleteView):
         context['Actividad'] = ActividadesDeFormacion.objects.get(pk= this_name)
         return context
 
+@method_decorator([login_required, cursos_required], name='dispatch')
 class ADEList(ListView):
     model = ActividadesDeEvaluacion
     template_name = 'cursos/landingADE.html'
@@ -247,6 +262,7 @@ class ADEList(ListView):
         context['IL'] = IndicadoresDeLogro.objects.get(pk= this_name)
         return context
 
+@method_decorator([login_required, cursos_required], name='dispatch')
 class ADECreate(CreateView):
     model = ActividadesDeEvaluacion
     form_class = ADEForm
@@ -258,6 +274,7 @@ class ADECreate(CreateView):
     def get_initial(self):
         return {'IL': self.kwargs['pk']}
 
+@method_decorator([login_required, cursos_required], name='dispatch')
 class ADEUpdate(UpdateView):
     model = ActividadesDeEvaluacion
     form_class = ADEForm
@@ -271,6 +288,7 @@ class ADEUpdate(UpdateView):
                 'Descripcion': ActividadesDeEvaluacion.objects.values_list('Descripcion', flat=True).get(pk=self.kwargs['pk']),
                 'RA': ActividadesDeEvaluacion.objects.values_list('IL_id', flat= True).get(pk= self.kwargs['pk'])}
 
+@method_decorator([login_required, cursos_required], name='dispatch')
 class ADEDelete(DeleteView):
     model = ActividadesDeEvaluacion
     template_name = 'cursos/deleteADE.html'

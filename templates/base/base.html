@@ -12,7 +12,7 @@
 <body>
 
 {% block navbar %}
-    {% if user.is_teacher %}
+
         <div class="bs-docs-section clearfix">
             <div class="row">
                 <div class="col-lg-12">
@@ -24,7 +24,21 @@
                                 </div>
                                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                                     <ul class="nav navbar-nav">
-                                        <li><a href="/cursos">Cursos </a></li>
+                                        {% if user.is_teacher %}
+                                            <li><a href="/cursos">Cursos </a></li>
+                                        {% endif %}
+                                        {% if user.is_dean %}
+                                            <li><a href="/programas">Programas </a></li>
+                                            <li><a href="/escuelas">Escuelas </a></li>
+                                        {% endif %}
+                                        {% if user.is_director %}
+                                            <li><a href="/programas">Programas </a></li>
+                                            <li><a href="/cursos">Cursos </a></li>
+                                            <li><a href="/cursos">Reportes </a></li>
+                                        {% endif %}
+                                        {% if user.is_superuser %}
+                                            <li><a href="/admin">Usuarios </a></li>
+                                        {% endif %}
                                     </ul>
                                     <ul class="nav navbar-nav navbar-right">
                                         {% if user.is_authenticated %}
@@ -45,138 +59,6 @@
                 </div>
             </div>
         </div>
-    {% elif user.is_director %}
-        <div class="bs-docs-section clearfix">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="bs-component">
-                        <nav class="navbar navbar-default">
-                            <div class="container-fluid">
-                                <div class="navbar-header">
-                                    <a class="navbar-brand" href="#">Home</a>
-                                </div>
-                                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                                    <ul class="nav navbar-nav">
-                                        <li><a href="/cursos">Cursos </a></li>
-                                        <li><a href="/programas">Programa Academico </a></li>
-                                    </ul>
-                                    <ul class="nav navbar-nav navbar-right">
-                                        {% if user.is_authenticated %}
-                                            <li><a href="#"><span
-                                                    class="glyphicon glyphicon-user"></span> {{ user.first_name }}</a>
-                                            </li>
-                                            <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span>
-                                                Log-out</a></li>
-                                        {% else %}
-                                            <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a>
-                                            </li>
-                                        {% endif %}
-                                    </ul>
-                                </div>
-                            </div>
-                        </nav>
-                    </div>
-                </div>
-            </div>
-        </div>
-    {% elif user.is_dean %}
-        <div class="bs-docs-section clearfix">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="bs-component">
-                        <nav class="navbar navbar-default">
-                            <div class="container-fluid">
-                                <div class="navbar-header">
-                                    <a class="navbar-brand" href="#">Home</a>
-                                </div>
-                                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                                    <ul class="nav navbar-nav">
-                                        <li><a href="/programas">Programas Academicos </a></li>
-                                    </ul>
-                                    <ul class="nav navbar-nav navbar-right">
-                                        {% if user.is_authenticated %}
-                                            <li><a href="#"><span
-                                                    class="glyphicon glyphicon-user"></span> {{ user.first_name }}</a>
-                                            </li>
-                                            <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span>
-                                                Log-out</a></li>
-                                        {% else %}
-                                            <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a>
-                                            </li>
-                                        {% endif %}
-                                    </ul>
-                                </div>
-                            </div>
-                        </nav>
-                    </div>
-                </div>
-            </div>
-        </div>
-    {% elif user.is_superuser %}
-        <div class="bs-docs-section clearfix">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="bs-component">
-                        <nav class="navbar navbar-default">
-                            <div class="container-fluid">
-                                <div class="navbar-header">
-                                    <a class="navbar-brand" href="#">Home</a>
-                                </div>
-                                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                                    <ul class="nav navbar-nav">
-                                        <li><a href="/admin">Gestion Usuarios </a></li>
-                                    </ul>
-                                    <ul class="nav navbar-nav navbar-right">
-                                        {% if user.is_authenticated %}
-                                            <li><a href="#"><span
-                                                    class="glyphicon glyphicon-user"></span> {{ user.first_name }}</a>
-                                            </li>
-                                            <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span>
-                                                Log-out</a></li>
-                                        {% else %}
-                                            <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a>
-                                            </li>
-                                        {% endif %}
-                                    </ul>
-                                </div>
-                            </div>
-                        </nav>
-                    </div>
-                </div>
-            </div>
-        </div>
-    {% else %}
-        <div class="bs-docs-section clearfix">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="bs-component">
-                        <nav class="navbar navbar-default">
-                            <div class="container-fluid">
-                                <div class="navbar-header">
-                                    <a class="navbar-brand" href="#">Home</a>
-                                </div>
-                                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                                    <ul class="nav navbar-nav navbar-right">
-                                        {% if user.is_authenticated %}
-                                            <li><a href="#"><span
-                                                    class="glyphicon glyphicon-user"></span> {{ user.first_name }}</a>
-                                            </li>
-                                            <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span>
-                                                Log-out</a></li>
-                                        {% else %}
-                                            <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a>
-                                            </li>
-                                        {% endif %}
-                                    </ul>
-                                </div>
-                            </div>
-                        </nav>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    {% endif %}
 
 {% endblock %}
 {% block header %}
